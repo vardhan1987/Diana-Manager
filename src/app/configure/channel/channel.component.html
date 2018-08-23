@@ -1,0 +1,107 @@
+<div class="row">
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-header" data-background-color="orange">
+        <h4 class="title">Configure</h4>
+        <p class="category">Configure Channels</p>
+      </div>
+      <div class="card-content">
+        <!--Register form-->
+        <form [formGroup]='channelForm' (ngSubmit)="addChannel()">
+          <div class="row">
+
+            <div class="col-md-6">
+              <div class="form-group form-black is-empty">
+                <label class="control-label">Channel Name</label>
+                <input type="text" id="nameText" class="form-control" formControlName="name">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group form-black is-empty">
+                <label class="control-label">Webhook API URL</label>
+                <input type="text" class="form-control" formControlName="webhookApi">
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group form-black is-empty">
+                <label class="control-label">Verification Token</label>
+                <input type="text" class="form-control" formControlName="verificationToken">
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group form-black is-empty">
+                <label class="switch">
+                  <input type="checkbox" formControlName="enabled">
+                  <span class="slider round"></span>
+                </label>
+                <h5>{{ this.channelForm.value.enabled ? 'Enable':'Disable'}} </h5>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="text-center">
+            <button class="btn btn-success waves-light" [disabled]='!this.channelForm.valid'>{{btnName}}</button>
+            <button class="btn btn-danger waves-light" (click)="this.channelForm.reset()">Clear</button>
+          </div>
+
+        </form>
+        <!--/Register form-->
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" data-background-color="orange">
+      <h4 class="title">Channels</h4>
+      <p class="category">Registered Channels</p>
+    </div>
+    <div class="card-content table-responsive">
+      <table class="table">
+        <thead class="text-danger">
+          <tr>
+            <th>Name</th>
+            <th>URL</th>
+            <th>Enabled</th>
+            <th>Verification Token</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let channel of channels">
+          <tr>
+            <td>{{channel.name}}</td>
+            <td>
+              <a href="#">{{channel.webhookApi}}</a>
+            </td>
+            <td>
+              {{channel.enabled ? 'Yes':'No'}}
+            </td>
+            <td>{{channel.verificationToken}}</td>
+            <td class="td-actions text-right">
+              <button type="button" rel="tooltip" title="Edit Channel" (click)="editChannel(channel)" class="btn btn-primary btn-simple btn-xs">
+                <i class="material-icons">edit</i>
+              </button>
+              <!-- <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
+                <i class="material-icons">close</i>
+              </button> -->
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>

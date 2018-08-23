@@ -1,0 +1,25 @@
+<div class="card">
+  <div class="card-header"  data-background-color="green">
+    <h4 class="title-lex">Intents</h4>
+    <p class="category-lex">Available Intents</p>
+  </div>
+  <div class="card-content table-responsive">
+    <table class="table">
+      <thead class="text-danger">
+        <tr>
+          <th>Intent</th>
+          <th>Response Type</th>
+          <th>Slots</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let int of intents">
+        <tr>
+          <td>{{int.action.intentName}}</td>
+          <td>{{int.type}}</td>
+          <td>{{int.action.hasSlots?int.action.slots:'No'}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>

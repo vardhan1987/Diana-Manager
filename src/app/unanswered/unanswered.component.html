@@ -1,0 +1,80 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-lex">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Amazon_Alexa_App_Logo.png" width="5px" />
+                        <h4 class="title-lex">Amazon Lex</h4>
+                        <p class="category-lex">AWS Lex Unanswered queries</p>
+                    </div>
+                    <div class="card-content table-responsive">
+                        <table class="table">
+                            <thead class="text-danger">
+                                <tr>
+                                    <th>Channel</th>
+                                    <th>CI Service</th>
+                                    <th>Query</th>
+                                    <th>Answer</th>
+                                    <th>User</th>
+                                    <th>Request Date</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody *ngFor="let answer of  answers">
+                                <tr *ngIf="answer.status==='0'">
+                                    <td>{{answer.channelName}}</td>
+                                    <td>{{answer.ciservice}}</td>
+                                    <td>{{answer.query}}</td>
+                                    <td>{{answer.answerByCi}}</td>
+                                    <td>{{answer.userName}}</td>
+                                    <td>{{answer.requestDate}}</td>
+                                    <td class="text-danger">{{answer.status === '0'?'Unanswered':'Failed'}}</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-google">
+                        <img src="https://www.brandeps.com/logo-download/A/Api-ai-01.png" width="5px" />
+                        <h4 class="title">Google Dialogflow</h4>
+                        <p class="category">Google Dialogflow Unanswered queries</p>
+                    </div>
+                    <div class="card-content table-responsive">
+                        <table class="table">
+                            <thead class="text-danger">
+                                <tr>
+                                    <th>Query</th>
+                                    <th>Channel</th>
+                                    <th>User</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let df of  dialogFlowQueries">
+                                    <td>{{df.query}}</td>
+                                    <td>
+                                        <i [class]="df.channelLog" aria-hidden="true"></i>
+                                        {{df.channel}}
+                                    </td>
+                                    <td>{{df.userName}}</td>
+                                    <td class="text-danger">{{df.date}}</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div> -->
+
+
+        </div>
+    </div>
+</div>

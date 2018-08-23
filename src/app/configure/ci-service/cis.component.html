@@ -1,0 +1,107 @@
+
+      <div class="row">
+          <div class="col-md-8">
+            <div class="card">
+              <div class="card-header" data-background-color="red">
+                <h4 class="title">Configure</h4>
+                <p class="category">Configure CI Service</p>
+              </div>
+              <div class="card-content">
+                <!--Register form-->
+                <form  [formGroup]='ciForm' (ngSubmit)="addCi()">
+                  <div class="row">
+    
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label class="control-label">Select</label>
+                        <!-- <input type="text" class="form-control" formControlName="name"> -->
+                        <select class="form-control" formControlName="name">
+                          <option *ngFor="let ci of cis" [value]="ci">{{ci}}</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group form-black is-empty">
+                        <label class="control-label">Access Key</label>
+                        <input type="text" class="form-control" formControlName="accessKey">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group form-black is-empty">
+                          <label class="control-label">Secret Key</label>
+                          <input type="text" class="form-control" formControlName="secretKey">
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-4">
+                        <div class="form-group form-black is-empty">
+                          <label class="switch">
+                            <input type="checkbox" formControlName="enabled">
+                            <span class="slider round"></span>
+                          </label>
+                          <h5>{{ this.ciForm.value.enabled ? 'Enable':'Disable'}} </h5>
+                        </div>
+                      </div>
+                    </div>
+    
+                  <div class="text-center">
+                    <button class="btn btn-success waves-light" [disabled]='!this.ciForm.valid'>{{btnName}}</button>
+                    <button class="btn btn-danger waves-light" (click)="this.ciForm.reset()">Clear</button>
+                  </div>
+    
+                </form>
+                <!--/Register form-->
+              </div>
+            </div>
+          </div>
+    
+        </div>
+
+
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header" data-background-color="red">
+                    <h4 class="title">CI Services</h4>
+                    <p class="category">Registered CI Services</p>
+                </div>
+                <div class="card-content table-responsive">
+                    <table class="table">
+                        <thead class="text-danger">
+                            <tr>
+                                <th>Name</th>
+                                <th>Access Key</th>
+                                <th>Secret Key</th>
+                                <th>Enabled</th>
+                                <th>Action</th>  
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let ci of ciModels">
+                            <tr>
+                                <td>{{ci.name}}</td>
+                                <td>{{ci.accessKey}}</td>
+                                <td>{{ci.secretKey}}</td>
+                                <td>
+                                  {{ci.enabled ? 'Yes':'No'}}
+                                </td>
+                                <td class="td-actions text-right">
+                                  <button type="button" rel="tooltip" title="Edit Channel" (click)="editCi(ci)" class="btn btn-primary btn-simple btn-xs">
+                                    <i class="material-icons">edit</i>
+                                  </button>
+                                  <!-- <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
+                                    <i class="material-icons">close</i>
+                                  </button> -->
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    

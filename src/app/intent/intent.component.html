@@ -1,0 +1,103 @@
+<div class="card">
+  <div class="card-header" data-background-color="purple">
+    <h4 class="title">Create Intent</h4>
+  </div>
+  <div class="card-content">
+    <!--Create Intent form-->
+    <form [formGroup]='intentForm' (ngSubmit)="addIntent()">
+
+      <!--Row Start-->
+      <div class="row">
+        <div formGroupName="action" class="col-md-12 form-black is-empty">
+          <div class="form-group">
+            <label class="control-label">Name</label>
+            <input type="text" id="intentName" class="form-control" formControlName="intentName">
+          </div>
+          <div class="form-group">
+            <label class="control-label">Training Phrases</label>
+            <textarea type="text" placeholder="Each line 1 phrase" class="form-control" id="utterance" rows="10" cols="100" formControlName="utterances"></textarea>
+          </div>
+        </div>
+      </div>
+      <!--Row End-->
+
+      <!--Row  start-->
+      <div class="row">
+        <div class="col-md-12 form-black is-empty">
+          <div class="form-group">
+            <label class="control-label">Response Type</label>
+            <div *ngFor="let typ of types">
+              <input type="radio" class="form-control" name="type" [value]="typ.value" formControlName="type"> {{typ.display}}
+            </div>
+            <!-- <input type="radio" name="type" value="RICH" formControlName="type"> RICH -->
+          </div>
+        </div>
+      </div>
+      <!--Row End-->
+
+      <!--Row Start-->
+      <div class="row">
+        <div class="col-md-12 form-black is-empty">
+          <div class="form-group">
+            <label class="control-label">Display Text</label>
+            <textarea type="text" placeholder="Each line one Text,will be picked randomely" class="form-control" id="displayTextId" rows="10"
+              cols="100" formControlName="displayText"></textarea>
+          </div>
+          <div class="form-group">
+            <label class="control-label">Speech Text</label>
+            <textarea type="text" placeholder="Each line one Text,will be picked randomely" class="form-control" id="speechTextId" rows="10"
+              cols="100" formControlName="speechText"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!--Row End-->
+
+      <!--Row Start-->
+
+      <div class="row">
+
+        <div formArrayName="images" class="col-md-8 form-black is-empty">
+          <button type="button" class="btn btn-success" (click)="addImages()" [disabled]="intentForm.get('type').value==='SIMPLE'">
+            <i class="material-icons">add</i> Image</button>
+          <div *ngFor="let imgs of intentForm.get('images').controls;let m = index" [formGroupName]="m">
+            <div class="form-group">
+              <input placeholder="Image URL" type="text" id="imgUrl{{m}}" class="form-control col-md-4" formControlName="url" [disabled]="intentForm.get('type').value==='SIMPLE'">
+              <input placeholder="Alternative text" type="text" id="imgAlt{{m}}" class="form-control col-md-4" formControlName="alt" [disabled]="intentForm.get('type').value ==='SIMPLE'">
+              <button type="button" title="Remove" (click)="intentForm.get('images').removeAt(m)" class="round btn btn-danger" [disabled]="intentForm.get('type').value==='SIMPLE'">
+                <i class="material-icons">delete</i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--Row End-->
+
+      <!--Row Start-->
+      <button type="button" class="btn btn-success" (click)="addButtons()" [disabled]="intentForm.get('type').value ==='SIMPLE'">
+        <i class="material-icons">add</i> Button</button>
+      <div class="row">
+        <div formArrayName="buttons" class="col-md-8 form-group form-black is-empty">
+          <div *ngFor="let btns of intentForm.get('buttons').controls;let y = index" [formGroupName]="y">
+            <input placeholder="Button Name" type="text" id="btnName{{y}}" class="form-control col-md-4" formControlName="name">
+            <input placeholder="Value" type="text" id="btnValue{{y}}" class="form-control col-md-4" formControlName="value">
+            <button type="button" title="Remove" (click)="intentForm.get('buttons').removeAt(y)" class="round btn btn-danger">
+              <i class="material-icons">delete</i>
+            </button>
+          </div>
+        </div>
+
+      </div>
+      <!--Row End-->
+
+      <!--Row start-->
+      <div class="text-right">
+        <button type="submit" class="btn btn-success waves-light" [disabled]='!this.intentForm.valid'>Submit</button>
+        <button class="btn btn-danger waves-light" (click)="this.intentForm.reset()">Clear</button>
+      </div>
+      <!--Row end-->
+
+    </form>
+    <!--/Register form-->
+  </div>
+</div>

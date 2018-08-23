@@ -1,0 +1,111 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header" data-background-color="red">
+                        <h4 class="title">Recent Activities</h4>
+                        <p class="category">Audit details of Diana Server.</p>
+                    </div>
+                    <div class="card-content table-responsive">
+                        <table class="table">
+                            <thead class="text-danger">
+                                <tr>
+                                    <th>Channel</th>
+                                    <th>CI Service</th>
+                                    <th>Request</th>
+                                    <th>Response</th>
+                                    <th>User</th>
+                                    <th>Requested Date</th>
+                                    <th>Last Updated Date</th>
+                                </tr>
+                            </thead>
+                            <tbody *ngFor="let audit of audits;let i = index;">
+                                <tr>
+                                    <td>{{audit.channelName}}</td>
+                                    <td>{{audit.ciserviceName}}</td>
+                                    <td> 
+                                        <a style="cursor: pointer" data-toggle="modal" attr.data-target="#myModalReq{{i}}">
+                                         Request
+                                        </a>
+                                        
+                                        
+
+                                    </td>
+                                    <td> <a style="cursor: pointer"  data-toggle="modal" attr.data-target="#myModalRes{{i}}">
+                                        Response</a>
+                                        
+                                        
+
+                                    </td>
+                                    <td>{{audit.userName}}</td>
+                                    <td>{{audit.requestDate}}</td>
+                                    <td class="text-danger">{{audit.lastUpdatedDate}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+<div *ngFor="let a of audits;let i = index">
+
+    <!-- The Modal -->
+    <div class="modal fade" id="myModalRes{{i}}">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Response Data</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <pre>{{ a.responseData | json }}</pre>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <!-- The Modal -->
+        <div class="modal fade" id="myModalReq{{i}}">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h4 class="modal-title">Request Data</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                           <pre>{{ a.requestData | json }}</pre>
+                        </div>
+
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+</div>
